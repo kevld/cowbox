@@ -1,0 +1,16 @@
+{% for user in users %}
+    <div class="col-md-3 col-sm-3" style="margin-bottom: 10px;">
+        <div class="input-group">
+                            <span class="input-group-addon">
+                                {% if user in ranch %}
+                                    <input type="checkbox" id="user-{{ user.id }}" name="user-ranch" class="user-ranch" data-id="{{ user.id }}" checked />
+                                {% else %}
+                                    <input type="checkbox" name="user-ranch" class="user-ranch" data-id="{{ user.id }}" />
+                                {% endif %}
+                            </span>
+            <label class="form-control" for="user-{{ user.id }}">{{ user.username }}</label>
+        </div>
+    </div>
+{% else %}
+    Pas de users dans la base
+{% endfor %}

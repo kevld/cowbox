@@ -1,0 +1,17 @@
+{% for ranch in ranchs %}
+    <li data-id="{{ ranch.id }}" class="message" >
+        <a href="javascript:void(0);">
+            {{ ranch.nom }} 
+            <i id="ranch-{{ ranch.id }}" 
+               class="ranch-i fa fa-check pull-right text-primary"
+            {% if ranch.id != ranchActif %}
+                style="display:none;"
+            {% endif %}
+            ></i>
+        </a>    
+    </li>
+{% else %}
+    <li >
+        Vous n'avez accès à aucun ranch.
+    </li>
+{% endfor %}

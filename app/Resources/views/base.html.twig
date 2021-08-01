@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CowBox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{{ asset('bundles/app/img/favicon.PNG') }}" />
+    <!-- CSS Libs -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/vendors/bootstrap-3.3.6-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/vendors/font-awesome-4.5.0/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/vendors/bootstrap-switch-master/dist/css/bootstrap-switch.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/app/vendors/sweetalert-master/dist/sweetalert.css') }}" />
+    <!-- CSS App -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/themes/flat-blue.css') }}">
+    {% block css %}
+    {% endblock %}    
+</head>
+
+<body class="flat-blue">
+<div class="app-container">
+    <div class="row content-container">
+        <nav class="navbar navbar-default navbar-fixed-top navbar-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-expand-toggle">
+                        <i class="fa fa-bars icon"></i>
+                    </button>
+                    <ol class="breadcrumb navbar-breadcrumb">
+                        <li class="active" id="page-courante"> {% block titre %} {% endblock %} </li>
+                    </ol>
+                    <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
+                        <i class="fa fa-th icon"></i>
+                    </button>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
+                        <i class="fa fa-times icon"></i>
+                    </button>
+                    <li class="dropdown" data-placement="left" data-toggle="tooltip" title="Changer de ranch">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"><i class="fa fa-inbox"></i></a>
+                        <ul class="dropdown-menu animated fadeInDown">
+                            <li class="title">
+                                Ranch <span class="badge pull-right"></span>
+                            </li>
+                            {{ render(controller('AppBundle:Ranch:get')) }}
+                        </ul>
+                    </li>
+		     {% if is_granted('ROLE_PROF') or is_granted('ROLE_ADMIN') %}
+                    <li id="off" class="dropdown danger" data-placement="bottom" data-toggle="tooltip" title="Eteindre la CowBox">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-power-off"></i></a>
+
+                    </li>
+                    <li id="reboot" class="dropdown danger" data-placement="bottom" data-toggle="tooltip" title="Redémarrer la CowBox">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-refresh"></i></a>
+
+                    </li>
+		    {% endif %}
+                    <li class="dropdown profile">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{% if user is defined %} {{ user.username }} {% endif %}<span class="caret"></span></a>
+                        <ul class="dropdown-menu animated fadeInDown">
+                            <li>
+                                <div class="profile-info">
+                                    <h4 class="username">{% if user is defined %} {{ user.username }} {% endif %}</h4>
+                                    <div class="btn-group margin-bottom-2x" role="group">
+                                        <a href="{{ path('profil_editer_homepage') }}" ><button type="button" class="btn btn-default"><i class="fa fa-user"></i> Profile</button></a>
+                                        <a href="{{ path('fos_user_security_logout') }}"><button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i> Déconnexion</button></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="side-menu sidebar-inverse">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="side-menu-container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">
+                            <div class="icon fa fa-university"></div>
+                            <div class="title">Cow<span class="text-danger">Box</span> </div>
+                        </a>
+                        <button type="button" class="navbar-expand-toggle pull-right visible-xs">
+                            <i class="fa fa-times icon"></i>
+                        </button>
+                    </div>
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="{{ path('homepage') }}">
+                                <span class="icon fa fa-th"></span><span class="title">Dashboard</span>
+                            </a>
+                        </li>
+                        {% if is_granted('ROLE_PROF') or is_granted('ROLE_ADMIN') %}
+                        <li>
+                            <a href="{{ path('ranch_homepage') }}">
+                                <span class="icon fa fa-inbox"></span><span class="title">Ranchs</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('user_homepage') }}">
+                                <span class="icon fa fa-user"></span><span class="title">Utilisateurs</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('classe_homepage') }}">
+                                <span class="icon fa fa-users"></span><span class="title">Classes</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li>
+                            <a href="{{ path('public_ranch_homepage') }}">
+                                <span class="icon fa fa-inbox"></span><span class="title">Ranchs publics</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('ftp_homepage') }}">
+                                <span class="icon fa fa-file-text-o"></span><span class="title">FTP</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('etherpad_homepage') }}">
+                                <span class="icon fa fa-file-word-o"></span><span class="title">Etherpad</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('ethercalc_homepage') }}">
+                                <span class="icon fa fa-file-excel-o"></span><span class="title">Ethercalc</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('scrumblr_homepage') }}">
+                                <span class="icon fa fa-clipboard"></span><span class="title">Scrumblr</span>
+                            </a>
+                        </li>
+                        {% if is_granted('ROLE_PROF') or is_granted('ROLE_ADMIN') %}
+                        <li>
+                            <a href="{{ path('system_homepage') }}">
+                                <span class="icon fa fa-gears"></span><span class="title">Paramètres de la cowbox</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- Main Content -->
+        <div class="container-fluid">
+            <div class="side-body padding-top">
+                {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    <footer class="app-footer">
+        <div class="wrapper">
+            <span class="pull-right"><a href="#"><i class="fa fa-long-arrow-up"></i></a></span> Cow<span class="text-danger">Box</span> 2.0.0
+        </div>
+    </footer>
+    <div class="modal fade" id="modal" data-backdrop="static" data-keyboard="false"></div>
+        
+</div>
+<!-- Javascript Libs -->
+<script type="text/javascript" src="{{ asset('bundles/app/vendors/jquery-2.2.0.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/app/vendors/bootstrap-3.3.6-dist/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/app/vendors/bootstrap-switch-master/dist/js/bootstrap-switch.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/app/vendors/jquery.matchHeight-min.js') }}"></script>
+<script src="{{ asset('bundles/app/vendors/sweetalert-master/dist/sweetalert.min.js') }}"></script>
+<!-- Javascript -->
+<script type="text/javascript" src="{{ asset('bundles/app/js/app.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/app/js/index.js') }}"></script>
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+{% block js %}
+{% endblock %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip(); 
+    });
+    $(function () {
+        //redemarrage de la cowbox    
+        $('#reboot').on('click', function(e) {
+            swal({   
+                title: "Attention !",   
+                text: "Redémarrer la CowBox ?",   
+                type: "warning",   
+                showCancelButton: true,   
+                confirmButtonColor: "#DD6B55",   
+                confirmButtonText: "Oui",   
+                closeOnConfirm: false 
+            }, function(){
+                $.ajax({
+                    url: Routing.generate('system_reboot'),
+                    success: function (data) {
+                        swal("Succès !", "La CowBox va redémarrer", "success");
+                    },
+                    error: function (xhr) {
+			swal("Succès !", "La CowBox va redémarrer", "success");
+                    }
+                });
+            });
+        });
+        //Extinction de la cowbox
+        $('#off').on('click', function(e) {
+            swal({   
+                title: "Attention !",   
+                text: "Eteindre la CowBox ?",
+                type: "warning",   
+                showCancelButton: true,   
+                confirmButtonColor: "#DD6B55",   
+                confirmButtonText: "Oui",   
+                closeOnConfirm: false 
+            }, function(){
+                $.ajax({
+                    url: Routing.generate('system_halt'),
+                    success: function (data) {
+                        swal("Succès !", "La CowBox va s'éteindre", "sucess");
+                    },
+                    error: function (xhr) {
+                        swal("Succès !", "La CowBox va s'éteindre", "sucess");
+
+                    }
+                });
+            });
+        });
+        
+        $(document).on('click', '.message', function () {
+            var id = $(this).data('id');
+            $.ajax({
+                url: Routing.generate('user_change_ranch', {id: id}),
+                success: function (data) {
+                    swal("Succès !", "Ranch changé", "success");
+                    $(document).find('.ranch-i').hide();
+                    $(document).find('#ranch-' + id).show();
+                },
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                    swal("Erreur !", "Une erreur s'est produite", "danger");
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

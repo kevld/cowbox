@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block titre %}
+    Utilisateurs
+{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget">
+                <div class="widget-header">
+                    <div class="title">
+                        <span class="fs1" aria-hidden="true" data-icon=""></span> Gestion des utilisateurs
+                    </div>
+                    <a href="#" id="add-user" class="btn btn-primary">Ajouter un utilisateur</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="table-users">
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal" data-backdrop="static" data-keyboard="false"></div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset('bundles/app/js/user.js') }}"></script>
+
+{% endblock %}

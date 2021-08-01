@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block titre %}
+    Classes
+{% endblock %}    
+{% block css %}
+    <link href="{{ asset('bundles/app/vendors/bootstrap-fileinput-master/css/fileinput.min.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="fs1" aria-hidden="true" ></span> Gestion des classes 
+                    </div>
+                </div>
+                <div class="card-body">
+                    <button id="classe-add" class="btn btn-primary">Ajouter une classe </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div>
+                    <div id="form_classes" style="display: none;">
+                        <input id="classe_id" type="file" class="file-loading" multiple="multiple" name="classes_ids[]">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="tab">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="{{ asset('bundles/app/vendors/bootstrap-fileinput-master/js/fileinput.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/vendors/bootstrap-fileinput-master/js/fileinput_locale_fr.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/classe.js') }}"></script>
+{% endblock %}

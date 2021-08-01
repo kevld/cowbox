@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}
+    Dashboard
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            {% if is_granted('ROLE_PROF') or is_granted('ROLE_ADMIN') %}
+            <div class="col-md-3" style="margin-bottom: 15px;">
+               <a href="{{ path('ranch_homepage') }}">
+                    <div class="card dark summary-inline">
+                        <div class="card-body">
+                            <i class="icon fa fa-inbox fa-4x"></i>
+                            <div class="content">
+                                <div class="title"><i class="icon fa fa-inbox"></i></div>
+                                <div class="sub-title">Ranchs</div>
+                            </div>
+                            <div class="clear-both"></div>
+                        </div>
+                    </div> 
+                </a>
+            </div>
+
+            <div class="col-md-3"  style="margin-bottom: 15px;">
+                <a href="{{ path('user_homepage') }}">
+                    <div class="card dark summary-inline">
+                        <div class="card-body">
+                            <i class="icon fa fa-user fa-4x"></i>
+                            <div class="content">
+                                <div class="title"><i class="icon fa fa-user"></i></div>
+                                <div class="sub-title">Utilisateurs</div>
+                            </div>
+                            <div class="clear-both"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-md-3"  style="margin-bottom: 15px;">
+                <a href="{{ path('classe_homepage') }}" >
+                    <div class="card dark summary-inline">
+                        <div class="card-body">
+                            <i class="icon fa fa-users fa-4x"></i>
+                            <div class="content">
+                                <div class="title"><i class="icon fa fa-users"></i></div>
+                                <div class="sub-title">Classes</div>
+                            </div>
+                            <div class="clear-both"></div>
+                        </div>
+                    </div> 
+                </a>
+            </div>
+            {% endif %}
+            <div class="col-md-3"  style="margin-bottom: 15px;">
+                <a href="{{ path('public_ranch_homepage') }}">
+                    <div class="card dark summary-inline">
+                        <div class="card-body">
+                            <i class="icon fa fa-inbox fa-4x"></i>
+                            <div class="content">
+                                <div class="title"><i class="icon fa fa-inbox"></i></div>
+                                <div class="sub-title">Ranchs publics</div>
+                            </div>
+                            <div class="clear-both"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3"  style="margin-bottom: 15px;">
+                <a href="{{ path('ftp_homepage') }}">
+                    <div class="card dark summary-inline">
+                        <div class="card-body">
+                            <i class="icon fa fa-file-text-o fa-4x"></i>
+                            <div class="content">
+                                <div class="title"><i class="icon fa fa-file-text-o"></i></div>
+                                <div class="sub-title">FTP</div>
+                            </div>
+                            <div class="clear-both"></div>
+                        </div>
+                    </div> 
+                </a>
+            </div>
+
+            <div class="col-md-3"  style="margin-bottom: 15px;">
+                <a href="{{ path('etherpad_homepage') }}">
+                    <div class="card dark summary-inline">
+                        <div class="card-body">
+                            <i class="icon fa fa-file-word-o fa-4x"></i>
+                            <div class="content">
+                                <div class="title"><i class="icon fa fa-file-word-o"></i></div>
+                                <div class="sub-title">Etherpad</div>
+                            </div>
+                            <div class="clear-both"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3"  style="margin-bottom: 15px;">
+                <a href="{{ path('ethercalc_homepage') }}">
+                    <div class="card dark summary-inline">
+                        <div class="card-body">
+                            <i class="icon fa fa-file-excel-o fa-4x"></i>
+                            <div class="content">
+                                <div class="title"><i class="icon fa fa-file-excel-o"></i></div>
+                                <div class="sub-title">Ethercalc</div>
+                            </div>
+                            <div class="clear-both"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-3"  style="margin-bottom: 15px;">
+                <a href="{{ path('scrumblr_homepage') }}">
+                    <div class="card dark summary-inline">
+                        <div class="card-body">
+                            <i class="icon fa fa-clipboard fa-4x"></i>
+                            <div class="content">
+                                <div class="title"><i class="icon fa fa-clipboard"></i></div>
+                                <div class="sub-title">Scrumblr</div>
+                            </div>
+                            <div class="clear-both"></div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% if is_granted('ROLE_PROF') or is_granted('ROLE_ADMIN') %}
+            <div class="col-md-3"  style="margin-bottom: 15px;">
+                <a href="{{ path('system_homepage') }}">
+                    <div class="card dark summary-inline">
+                        <div class="card-body">
+                            <i class="icon fa fa-gears fa-4x"></i>
+                            <div class="content">
+                                <div class="title"><i class="icon fa fa-gears"></i></div>
+                                <div class="sub-title">Paramètres</div>
+                            </div>
+                            <div class="clear-both"></div>
+                        </div>
+                    </div> 
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

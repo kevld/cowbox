@@ -1,0 +1,41 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 id="label-titre" class="modal-title">Gérer les élèves du ranch<i id="floppy-ranch" class="glyphicon glyphicon-floppy-disk pull-right"></i></h4>
+
+        </div>
+        <div class="modal-body">
+            <div class="input-group form-group" style="width: 100%;">
+                <select id="classes" class="form-control">
+                    <option value="-1">-- Toutes --</option>
+                    {% for classe in classes %}
+                    <option value="{{ classe.id }}">-- {{ classe.nom }} --</option>
+                    {% else %}
+                    <option value="-1">-- Pas de classes --</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div id="user-list" class="row">
+                {% for user in users %}
+                    <div class="col-md-3 col-sm-3" style="margin-bottom: 10px;">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                {% if user in ranch %}
+                                    <input type="checkbox" id="user-{{ user.id }}" name="user-ranch" class="user-ranch" data-id="{{ user.id }}" checked />
+                                {% else %}
+                                    <input type="checkbox" name="user-ranch" class="user-ranch" data-id="{{ user.id }}" />
+                                {% endif %}
+                            </span>
+                            <label class="form-control" for="user-{{ user.id }}">{{ user.username }}</label>
+                        </div>
+                    </div>
+                {% else %}
+                    Pas de users dans la base
+                {% endfor %}
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        </div>
+    </div>
+</div>

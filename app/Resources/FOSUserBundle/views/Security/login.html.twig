@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CowBox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{{ asset('bundles/app/img/favicon.PNG') }}" />
+    <!-- CSS Libs -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/vendors/bootstrap-3.3.6-dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/vendors/font-awesome-4.5.0/css/font-awesome.min.css') }}">
+
+    <!-- CSS App -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/themes/flat-blue.css') }}">
+</head>
+
+<body class="flat-blue login-page">
+    <div class="container">
+    <div class="login-box">
+        <div>
+            <div class="login-form row">
+                <div class="col-sm-12 text-center login-header">
+                    <i class="login-logo fa fa-connectdevelop fa-5x"></i>
+                    <h4 class="login-title">Cow<span class="text-danger">Box</span></h4>
+                </div>
+                <div class="col-sm-12">
+                    <div class="login-body">
+                        <div class="progress hidden" id="login-progress">
+                            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                Connexion
+                            </div>
+                        </div>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <span class="input-group-addon">Vous êtes déjà connecté.</span>
+                        {% else %}
+                            {% block fos_user_content %}
+                                <form id="form_login" action="{{ path("fos_user_security_check") }}" method="post">
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                                    <div class="control">
+                                        {% if error %}
+                                            <p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="control">
+                                        Nom d'utilisateur
+                                        <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" placeholder="username" required="required" />
+                                    </div>
+                                    <div class="control">
+                                        Mot de passe
+                                        <input class="form-control" id="password" name="_password" placeholder="********" required="required" type="password"/>
+                                    </div>
+                                    <div class="login-button text-center">
+                                        <input type="button" class="btn btn-primary" id="send" value="Connexion">
+                                    </div>
+                                </form>
+                            {% endblock fos_user_content %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Javascript Libs -->
+    <script type="text/javascript" src="{{ asset('bundles/app/vendors/jquery-2.2.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/vendors/bootstrap-3.3.6-dist/js/bootstrap.min.js') }}"></script>
+
+    <!-- Javascript -->
+    <script>
+        $(function() {
+            $('#send').on('click', function (e) {
+                e.preventDefault();
+                $('#form_login').submit();
+            });
+            $(document).keypress(function(e) {
+                if(e.which == 13) {
+                    e.preventDefault();
+                    $('#form_login').submit();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

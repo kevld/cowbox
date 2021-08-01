@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}
+    Ethercalc
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                        <div class="col-md-6">
+                            Sélectionnez un calc existant
+                            <div class="input-group form-group" style="width: 100%;">
+                                <select id="select-calcs" class="form-control" >
+                                    <option value="-1"> ----- </option>
+                                    {% for ranch in user.ranchs %}
+                                        {% for calc in ranch.calcs %}
+                                            <option value="{{ calc.nom }}">{{ calc.nom }}</option>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            Ou créez un nouveau calc
+                            <div class="input-group form-group">
+                                <div class="dtp-container dropdown fg-line">
+                                    <input type="text" class="form-control" id="input-name" />
+                                </div>
+                                <span id="addCalc" class="input-group-addon" style="cursor:pointer"><i class="glyphicon glyphicon-plus"></i></span>
+                            </div>
+                        </div>
+                </div>
+                <div class="card-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <iframe id="iframe" src="http://192.168.42.1:9002" width="100%" height="700px" style="display: none;"></iframe>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset('bundles/app/js/ethercalc.js') }}"></script>
+{% endblock %}

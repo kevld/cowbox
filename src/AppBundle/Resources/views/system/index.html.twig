@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+{% block titre %}
+    Paramètres
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        Etat des services
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table>
+                        <tr>
+                            <td class="margin-right-10">Apache 2 </td>
+                            <td>
+                                <div class="onoffswitch">
+                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="lbl-apache" checked="" disabled>
+                                    <label class="onoffswitch-label" for="lbl-apache">
+                                        <div class="onoffswitch-inner"></div>
+                                        <div class="onoffswitch-switch"></div>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="margin-right-10">Hostapd </td>
+                            <td>
+                                <div class="onoffswitch">
+                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="lbl-hostapd" checked="" disabled>
+                                    <label class="onoffswitch-label" for="lbl-hostapd">
+                                        <div class="onoffswitch-inner"></div>
+                                        <div class="onoffswitch-switch"></div>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="margin-right-10">MySQL </td>
+                            <td>
+                                <div class="onoffswitch">
+                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="lbl-mysql" checked="" disabled>
+                                    <label class="onoffswitch-label" for="lbl-mysql">
+                                        <div class="onoffswitch-inner"></div>
+                                        <div class="onoffswitch-switch"></div>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="margin-right-10">Proftpd </td>
+                            <td>
+                                <div class="onoffswitch">
+                                    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="lbl-proftpd" checked="" disabled>
+                                    <label class="onoffswitch-label" for="lbl-proftpd">
+                                        <div class="onoffswitch-inner"></div>
+                                        <div class="onoffswitch-switch"></div>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="margin-right-10">SSID </td>
+                            <td id="ssid-name"></td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="col-md-12" id="state-card">
+
+                </div>
+                <div class="col-md-12">
+                    Changer le ssid de la cowbox
+                    <div class="input-group form-group">
+                        <div class="dtp-container dropdown fg-line">
+                            <input type="text" class="form-control" id="input-ssid" />
+                        </div>
+                        <span id="change-ssid" class="input-group-addon" style="cursor:pointer"><i class="glyphicon glyphicon-wrench"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset('bundles/app/vendors/bootstrap-switch-master/dist/js/bootstrap-switch.min.js') }}"></script>
+    <script src="{{ asset('bundles/app/js/system.js') }}"></script>
+{% endblock %}

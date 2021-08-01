@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}
+    Edition de profil
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="widget">
+                <div class="widget-header">
+                    <div class="title">
+                        <span class="fs1" aria-hidden="true" data-icon=""></span> Mise à jour de mot de passe
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            Mot de passe
+            <div class="input-group form-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <div class="dtp-container dropdown fg-line">
+                    <input type="password" class="form-control" id="p1" placeholder="*****" />
+                </div>
+            </div>
+            Confirmer
+            <div class="input-group form-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <div class="dtp-container dropdown fg-line">
+                    <input type="password" class="form-control" id="p2" placeholder="*****" />
+                </div>
+            </div>
+            <button id="valider" class="btn btn-primary">Valider</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(function(){
+            $('#valider').on('click', function () {
+                var p1 = $('#p1').val();
+                var p2 = $('#p2').val();
+                if(p1 == p2 && p1 != "" && p1 != undefined && p1 != null) {
+                    swal(
+                            {
+                                title: "Attention !",
+                                text: "Mettre à jour le mot de passe ?",
+                                type: "info",
+                                showCancelButton: true,
+                                closeOnConfirm: false,
+                                showLoaderOnConfirm: true,
+                            },
+                            function(){
+                                $.ajax({
+                                    method: 'POST',
+                                    url: Routing.generate('profil_update_pass'),
+                                    data: {pass: p1},
+                                    success: function (data) {
+                                        swal("Succès","Mot de passe mis à jour","success");
+                                    },
+                                    error: function (xhr) {
+                                        swal("Erreur !", "Une erreur s'est produite", "error");
+                                    }
+                                });
+                            }
+                    );
+                }
+                else {
+                    swal("Erreur !", "Remplissez les deux champs et de manière identique", "error");
+                }
+            });
+        });
+    </script>
+{% endblock %}

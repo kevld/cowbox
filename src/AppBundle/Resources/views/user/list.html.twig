@@ -1,0 +1,33 @@
+<table class="table table-condensed table-striped table-hover table-bordered pull-left dataTable" id="data-table" aria-describedby="data-table_info">
+    <thead>
+        <tr role="row">
+            <th>
+                Id
+            </th>
+            <th>
+                Username
+            </th>
+            <th class="text-center">
+                Supprimer
+            </th>
+        </tr>
+    </thead>
+
+    <tbody role="alert" aria-live="polite" aria-relevant="all"><tr class="gradeC odd">
+        {% for user in users %}
+            <tr class="gradeU odd" data-id="{{ user.id }}" style="cursor:pointer;">
+                <td class="edit">{{ user.id }}</td>
+                <td class="edit">{{ user.username }}</td>
+                <td class="text-center">
+                    <a href="#" data-id="{{ user.id }}" class="suppr"><i class="glyphicon glyphicon-remove text-danger"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td></td>
+                <td>Pas d'utilisateur ajouté</td>
+                <td></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

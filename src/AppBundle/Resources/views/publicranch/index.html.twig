@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}
+    Ranchs publics
+{% endblock %}    
+
+{% block css %}
+    <link href="{{ asset('bundles/app/vendors/bootstrap-fileinput-master/css/fileinput.min.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="fs1" aria-hidden="true" ></span> Gestion des ranchs
+                    </div>
+                </div>
+                <div class="card-body">
+                    <button id="add-ranch" class="btn btn-primary">Ajouter un ranch public</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="tab">
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal" data-backdrop="static" data-keyboard="false"></div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset('bundles/app/js/publicranch.js') }}"></script>
+{% endblock %}

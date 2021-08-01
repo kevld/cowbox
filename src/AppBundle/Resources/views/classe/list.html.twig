@@ -1,0 +1,6 @@
+<select id="active-classe">
+    <option value="-1"> ----- </option>
+    {% for classe in classes %}
+        <option value="{{ classe.id }}">{{ classe.nom }}</option>
+    {% endfor %}
+</select>
